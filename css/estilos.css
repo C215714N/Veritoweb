@@ -6,7 +6,6 @@
         bottom: 650px;  
     }
 }
-
 :root{
     --roboto: 'Roboto', sans-serif;
     --poppins:'Poppins', sans-serif;
@@ -26,6 +25,13 @@
     --gradGris:linear-gradient(to right, var(--grisC) , var(--bco)); 
 }
 /*Background Animation*/
+    #background{ 
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: -1;
+        animation: girar 360s linear infinite;
+    }
     [class*="cuad"]{
         position: absolute;
         z-index: -1;
@@ -38,7 +44,7 @@
         right:45px;
         opacity:35%;
         transform-style: preserve-3d;
-        animation: girar 18s 12s ease infinite; 
+        animation: girar 18s 6s ease infinite alternate; 
     }
     .cuadMed{
         width: 120px;
@@ -48,7 +54,7 @@
         right:440px;
         opacity:35%;
         transform-style: preserve-3d;
-        animation: girar 20s 5s ease infinite;
+        animation: girar 20s 5s ease infinite alternate;
     }
     .cuadChic{
         width: 80px;
@@ -57,7 +63,7 @@
         bottom: 0px;
         right:280px;
         opacity:20%;
-        animation: girar 20s 25s ease-in-out infinite;
+        animation: girar 20s 3s ease-in-out infinite alternate;
     }
     .cuadGde1{
         width: 200px;
@@ -68,7 +74,7 @@
         left:15px;
         opacity:20%;
         transform-style: preserve-3d;
-        animation: girar 20s 20s ease infinite; 
+        animation: girar 20s 5s ease infinite alternate; 
     }
     .cuadChic1{
         width: 80px;
@@ -78,7 +84,7 @@
         bottom: 0px;
         left:150px;
         opacity: 35%;
-        animation: girar 18s 12s ease-in-out infinite;
+        animation: girar 18s 6s ease-in-out infinite alternate;
     }
 /* Reglas Generales */
     *{
@@ -86,13 +92,14 @@
         scroll-behavior: smooth;
     }
     body{
-        background: linear-gradient(to bottom right ,rgb(102, 22, 230)0%, rgb(178, 128, 243) 100%);
+        background: linear-gradient(to bottom right ,rgb(102, 22, 230)0%, rgb(178, 128, 243) 100%)  center/cover ;
         box-sizing: border-box;
         font-family: var(--poppins);
         color: var(--texto);
     }
-    main{
-        margin: 1rem auto;
+    main{ 
+        margin: 1rem auto; 
+        overflow: hidden;
     }
     /*Margenes*/
     h1,
@@ -144,19 +151,14 @@
     background-color: var(--bco);
 }
 #menu a{ 
-    display: block;
+    display: grid;
     padding: .25rem;
     text-decoration: none;
     color: var(--texto);
-    font: normal .75rem var(--poppins);
+    font: bold .75rem var(--poppins);
 }
-#menu :is(.far, .fas){
-    display:block;
-    font-size: 2.5rem;
-}
-#menu a:hover{
-    color: var(--textoC);
-}
+#menu :is(.far, .fas){ font-size: 2.5rem; }
+#menu a:hover{ color: var(--textoC); }
 
 /*-----------Contenedores-------------------*/
 [id^="contenedor"]{
@@ -196,12 +198,8 @@
     font-size: var(--h3);
 }
 /*--------Contenedor Tarjeta----------*/
-#titulo{
-    padding: 0 1.5rem;
-}
-.tarjeta{
-    padding: 1.5rem;
-}
+#titulo{ padding: 0 1.5rem; }
+.tarjeta{ padding: 1.5rem; }
 .foto{
     width: 100%;
     overflow: hidden;
@@ -210,18 +208,13 @@
     clip-path: polygon(178% 0, -94% 0, 50% 82%);
 }
 #info h1{
-    font-family: var(--poppins);
-    font-weight: 400;
+    font: 400 var(--h1) var(--poppins);
     text-align: center;
-    font-size: var(--h1);
 }
 #info h3{
-    font-family: var(--poppins);
-    font-weight: 300;
+    font: 300 var(--h3) var(--poppins);
     text-align: center;
-    font-size: var(--h3);
     color: var(--textoC);
-
 }
 /*----------Contenedor about----------------*/
 #contenedor-about p{
@@ -281,9 +274,7 @@
     justify-items: center;
     gap: .5rem;
 }
-.conocimientos li{
-    min-width: min(100%, 10rem);
-}
+.conocimientos li{ min-width: min(100%, 10rem); }
 .conocimientos strong{
     display: flex;
     align-items: center;
@@ -329,112 +320,99 @@
 
 @media(min-width:600px){/*a partir de 600 se ve asi*/
     body{
-        width: 100vw;
-        height: 100vh;
+        max-width: 1320px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: min(20%, 5rem) min(80%, 640px);
+        grid-template-areas: 
+            'nav header'
+            'nav main'
+            'nav footer';
+        justify-content:  center;
+        gap: .5rem;
     }
-    main{
-        display: flex;
-    } 
-  /*------------menu--------------------*/  
+    #nav{ grid-area: nav; }
+    #contenedor-tarjeta{ grid-area: header; }
+    main{ grid-area: main; }
+    #contenedor-contacto{ grid-area: footer; }
+    /*------------menu--------------------*/  
     #nav{
-        height: 85vh;
-        width: 85px;
-        margin-top: 40px;
-        margin-left: 20px;
-        z-index: 1;   
-        position: fixed; 
-        border: 0;
-        left: 5px;
-    }
-    #menu{
-        display: block;
-        width: 85px; 
-        height: 85vh;   
+        top: 3rem;
+        max-width: 5rem;
+        max-height: 25rem;
+        display: grid;
+        align-content: center;
     }
     #menu li{
-        width: 85px; 
-        height: 25%;  
-        border-bottom: 1px solid var(--grisM);
-        border-left: 0;  
+        width: 100%;
+        padding: .5rem;
+        box-shadow: 0 0 .25rem var(--grisC);
     }
-    #menu li:last-child{
-        border-bottom: 0;
-    }
-    #menu li a{  
-        height: 100%;
-        box-sizing: border-box;
-        padding-top: 35px; 
-    }
-    #menu li a .far, .fas{
-        margin-top: 0;
-    }
-
     /*-----------tarjeta-------------------*/
     #contenedor-tarjeta{
-        width: 450px;
-        top: 40px;
-        left:74px;
-        position: fixed;
-        z-index: 2;
-        box-shadow: -15px -12px 3px var(--ros);
-        margin-top: 0;
+        margin: 1rem 0 0;
+        padding: 0 0 1.5rem;
+        box-shadow: 0 0 .5rem var(--ros);
+        font-size: 1.25rem;
     }
-    #foto{
-        width: 100%;
-        overflow: hidden;
-        border-radius: .5rem;
-    }
-    #foto img{
-        width: 100%;
-        clip-path: polygon(178% 0, -94% 0, 50% 82%);
-    }
-
+    main{ margin: 0; }
     /*-----------Contenedores -------------------*/
-    #contenedor-about, #contenedor-cv, #contenedor-trabajos, #contenedor-contacto{
-        width: 630px;
-        height: 77vh;
-        position: absolute;
-        top: 45px;
-        left:493px;
+    [id^="contenedor"]{
+        width: 100%;
+        margin: 0;
         padding: 1rem 2rem;
-        z-index: 1;
-        box-shadow: none;
-        overflow: auto;
-        margin-top: 0;
-        transition: right 0.8s ease;
+        transition: max-height 0.8s ease;
     }
     .hidden{
-        display: none;
-        transform: translateX(-17px);
-        /* left: -170; */
-        
+        max-height: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .open{ 
+        max-height: 2160px;
+        padding: 1.5rem;
+        overflow: auto;
+    }
+    ::-webkit-scrollbar{
+        width: .6rem;
+        border-radius: 0 .25rem .25rem 0;
+        background-color: var(--bco);
+    }
+    ::-webkit-scrollbar-thumb{
+        border-radius: .5rem;
+        background-color: var(--grisC);
+    }
+}
+@media(min-width:1200px){
+    body{
+        grid-template-areas: 
+            'nav header main';
+        align-items: flex-start;
+    }
+    #contenedor-contacto{ grid-area: main; }
+    #contenedor-tarjeta{
+        position: sticky;
+        top: 1rem;
+        z-index: 2;
+    }
+    main{ border-radius: .25rem; }
+    main [id^="contenedor"],
+    #contenedor-contacto{ border-radius: .25rem 0 0 .25rem; }
+    main,
+    #contenedor-tarjeta,
+    #contenedor-contacto{
+        margin: .5rem 0;
+        height: max(95vh, 640px);
+        overflow: auto;
+    }
+    .hidden{
+        transform: translate(-100%, -50%);
+        transition: all 1s ease;
+        z-index: 1;
     }
     .open{
-        transform: translateX(18px);
-        /* left: 496px; */
-        
-    }
-    /*----------Contenedor About----------*/
-    /* #contenedor-about{
-        display: none;
-    } */
-    #contenedor-about .seccion-1{
-        display: flex;
-    }
-    #contenedor-about .seccion-1 .parrafo{
-        width: 50%;
-        padding-left: 15px;
-        padding-right: 0;
-    }
-    /*----------Contenedor-cv----------*/
-    /* #contenedor-cv{
-        display: none;
-    } */
-    /*----------Contenedor Contacto----------*/
-    #contenedor-contacto .seccion-1 .lista-datos .localidad span{
-        right: 2.5rem;
-    }
-    #contenedor-contacto .seccion-1 .lista-datos .mail span{
-        right: 2.5rem;
+        transform: translate(0,0);
+        transition: all 1s ease-out;
+        z-index: 1;
     }
 }
